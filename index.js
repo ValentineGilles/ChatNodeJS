@@ -12,10 +12,11 @@ app.get('/', (req, res) => {
 });
 
 let connectedUsers = {};
+n=0
 
 io.on('connection', (socket) => {
-  // console.log(connectedUsers)
-  connectedUsers[socket.id]="User"+Object.keys(connectedUsers).length;
+  connectedUsers[socket.id]="User"+n;
+  n=n+1;
   io.emit('chat message','user connected '+connectedUsers[socket.id]);
   io.emit('update online users', connectedUsers);
 
