@@ -1,11 +1,17 @@
 const express = require('express');
 const { lstatSync } = require('fs');
 const app = express();
+const path = require("path");
+app.use(express.static(path.join(__dirname, "public")));
+
+
 const http = require('http');
 const { waitForDebugger } = require('inspector');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
+
 const io = new Server(server);
+
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
