@@ -23,8 +23,8 @@ n=0
 io.on('connection', (socket) => {
   connectedUsers[socket.id]="User"+n;
   n=n+1;
-  io.emit('chat message','user connected '+connectedUsers[socket.id]);
-  io.emit('update online users', connectedUsers);
+  //io.emit('chat message','user connected '+connectedUsers[socket.id]);
+  //io.emit('update online users', connectedUsers);
 
 
   socket.on('chat message', (msg) => {
@@ -53,6 +53,7 @@ io.on('connection', (socket) => {
   socket.on('addUser', (nickname) => {
     lastname=connectedUsers[socket.id];
     connectedUsers[socket.id] = nickname;
+    io.emit("logged");
     io.emit('chat message', "user "+lastname+" as rename into "+nickname);
     io.emit('update online users', connectedUsers);
   });
