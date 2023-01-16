@@ -50,6 +50,12 @@ main {
       color: aliceblue;
 }
 
+#messages li {
+      padding-top: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid gray;
+}
+
 #feedback {
       position: absolute;
       bottom: 0;
@@ -59,7 +65,6 @@ main {
 
 #messages div {
       margin: 0;
-      padding: 10px;
       color: white;
 }
 
