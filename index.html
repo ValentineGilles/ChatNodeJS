@@ -2,24 +2,29 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Socket.io</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Socket.io</title>
   <link rel="stylesheet" href="styles/style.css">
 </head>
 
 <body>
-  <ul id="messages"></ul>
-  <div id="feedback"></div>
-
-  <div id="Online">
-    <p>Online</p>
-    <div id="onlineUsersList"></div>
-  </div>
-  <form id="form" action="">
-    <input id="input" autocomplete="off" /><button>Send</button>
-    <input id="nameinput" autocomplete="off" /><button>name</button>
-  </form>
+  <aside>
+    <div id="Online"><p>Online Users</p>
+      <div id="onlineUsersList"></div>
+    </div>
+  
+  </aside>
+  <main>
+    <div id="content">
+      <ul id="messages"></ul>
+      <div id="feedback"></div>
+    </div>
+    <form id="form" action="">
+      <input id="messageinput" autocomplete="off" /><button>Send</button>
+      <input id="nameinput" autocomplete="off" /><button>name</button>
+    </form>
+  </main>
 
 
   <script src="/socket.io/socket.io.js"></script>
@@ -28,7 +33,7 @@
 
     var messages = document.getElementById('messages');
     var form = document.getElementById('form');
-    var input = document.getElementById('input');
+    var input = document.getElementById('messageinput');
     var nameinput = document.getElementById('nameinput');
     var feedback = document.getElementById('feedback');
     const onlineUsersList = document.getElementById('onlineUsersList')
@@ -72,10 +77,10 @@
       onlineUsersList.innerHTML = '';
       console.log(onlineUsers)
       for (let userId in onlineUsers) {
-        //console.log(onlineUsers[userId])
         const username = onlineUsers[userId];
         const li = document.createElement("li");
-        li.innerHTML = username;
+        li.id = 'list-Item' + userId;
+        li.innerHTML = "🟢  " + username;
         onlineUsersList.appendChild(li);
       }
     });
