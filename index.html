@@ -49,9 +49,8 @@
 
     loginform.addEventListener('submit', function(e) {
         e.preventDefault();
-        console.log("hihi");
-        socket.emit("addUser");
         socket.emit('addUser', nameinput.value);
+        name.value=''
 
     });
 
@@ -61,17 +60,8 @@
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      if (input.value) {
-        socket.emit('chat message', input.value);
-        input.value = '';
-      }
-
-      if (nameinput.value) {
-        socket.emit('addUser', nameinput.value);
-        //console.log(nameinput.value)
-        nameinput.value = '';
-      }
-
+      socket.emit('chat message', input.value);
+      input.value = '';
     });
 
     input.addEventListener("keypress", () => {
