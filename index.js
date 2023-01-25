@@ -80,4 +80,5 @@ io.on("connection", (socket) => {
 
 // On va demander au serveur http de répondre sur le port 3000
 http.listen(3000, () => {
+    console.log('listening on http://localhost:3000');
 });
