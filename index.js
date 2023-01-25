@@ -4,6 +4,12 @@ const app = express();
 const path = require("path");
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use(express.static(path.join(__dirname, "public/javascript"), {
+  setHeaders: (res) => {
+    res.set('Content-Type', 'application/javascript');
+  },
+}));
+
 
 const http = require('http');
 const { waitForDebugger } = require('inspector');
