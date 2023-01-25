@@ -18,6 +18,7 @@ app.get('/', (req, res) => {
 });
 
 let connectedUsers = {};
+let last_user = "";
 
 io.on('connection', (socket) => {
 
@@ -33,32 +34,51 @@ io.on('connection', (socket) => {
       }
     }
     else{
-      io.emit('chat message', connectedUsers[socket.id]+ " : "+msg);
+      if (last_user != socket.id)
+      {
+        io.emit('pseudo message', connectedUsers[socket.id]);
+        last_user = socket.id;
+        io.emit('concat message', msg);
+      }
+      else
+      {
+        io.emit('concat message', msg)
+      }
     }
   });
 
+  socket.on('auto message', (msg) => {
+    io.emit('auto message', msg);
+  });
 
   socket.on('disconnect', () => {
-    io.emit('chat message','user disconnected ' + connectedUsers[socket.id]);
+    io.emit('auto message', connectedUsers[socket.id] + " vient de se déconnecter.");
     delete connectedUsers[socket.id];
     io.emit('update online users', connectedUsers);
   });
 
   socket.on('addUser', (nickname) => {
+    lastname=connectedUsers[socket.id];
     connectedUsers[socket.id] = nickname;
     io.emit("logged");
-    io.emit('chat message', "user "+nickname+" is onlineddd");
+    io.emit('auto message', connectedUsers[socket.id] +" vient de se connecter.");
     io.emit('update online users', connectedUsers);
   });
 
   socket.on("typing", () => {
     socket.broadcast.emit("typing",connectedUsers[socket.id]);
   });
+
+  socket.on('concat message', (msg) => {
+    io.emit('concat message', msg);
+  });
 });
 
 server.listen(3000, () => {
   console.log('listening on localhost:3000');
 });
+
+
 
 
 io.emit('some event', { someProperty: 'some value', otherProperty: 'other value' });

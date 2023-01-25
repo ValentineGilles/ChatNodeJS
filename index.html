@@ -71,10 +71,32 @@
 
     socket.on('chat message', function (msg) {
       var item = document.createElement('li');
-      item.textContent = msg;
+      item.innerHTML = msg;
       messages.appendChild(item);
       window.scrollTo(0, document.body.scrollHeight);
     });
+
+    socket.on('concat message', function (msg) {
+      var lastChild = document.getElementById("messages").lastChild;
+      lastChild.innerHTML += "<br/>" + msg ;
+      messages.appendChild(lastChild);
+      window.scrollTo(0, document.body.scrollHeight);
+    });
+
+
+    socket.on('auto message', function(msg) {
+      var item = document.createElement('li');
+      item.innerHTML = msg;
+      messages.appendChild(item);
+      window.scrollTo(0, document.body.scrollHeight);
+  });
+
+  socket.on('pseudo message', function(msg) {
+      var item = document.createElement('li');
+      item.innerHTML = "<p>" + msg + "</p> </br>";
+      messages.appendChild(item);
+      window.scrollTo(0, document.body.scrollHeight);
+  });
 
     socket.on("typing", (name) => {
       feedback.innerHTML = `<p><em>${name}</em> is typing...</p>`;
