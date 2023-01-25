@@ -5,8 +5,9 @@ window.onload = () => {
     
     loginform.addEventListener('submit', function(e) {
         const room = document.querySelector("#tabs li.active").dataset.room;
+        var selectedButton = document.querySelector("input[name='gender']:checked");
           e.preventDefault();
-          socket.emit('addUser', {name : nameinput.value, room : room});
+          socket.emit('addUser', {name : nameinput.value, room : room, image : selectedButton.id});
           nameinput.value=''
           login.style.display='none';
       });
@@ -34,7 +35,8 @@ window.onload = () => {
     socket.on('pseudo_message', (msg) =>{
         var messages = document.getElementById('messages');
         var item = document.createElement('li');
-        item.innerHTML = "<p>" + msg + "</p> </br>";
+        //item.innerHTML = '<img src='+msg.image+'></img>'+"<p>" + msg.name + "</p> </br>";
+        item.innerHTML = "<p>" + msg.name + "</p> </br>";
         messages.appendChild(item);
         window.scrollTo(0, document.body.scrollHeight);
       });
@@ -104,5 +106,11 @@ window.onload = () => {
           onlineUsersList.appendChild(li);
         }});
 
+    fetch('/images')
+    .then((response) => response.text())
+    .then((options) => {
+      var pictures=document.getElementById('pictures')
+      pictures.innerHTML = options;
+    });
 
 }

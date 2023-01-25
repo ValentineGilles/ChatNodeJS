@@ -2,6 +2,9 @@
 const express = require("express");
 const app = express();
 
+// On charge "fs"
+const fs = require('fs');
+
 // On charge "path"
 const path = require("path");
 
@@ -18,6 +21,32 @@ const io = require("socket.io")(http);
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
 });
+
+//On initialise le chemin du dossier
+const imagesDir = 'Images';
+
+// On lit toutes les images dans notre dossier
+app.get('/images', (req, res) => {
+    fs.readdir(imagesDir, (err, files) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send(err);
+        return;
+      }
+    
+      let options = '<legend>Please select your avatar</legend>';
+      files.forEach((file) => {
+        // options += `<img src="${imagesDir}/${file}" alt="${file}">`;
+        options += 
+        `<input type="radio" name="gender" class="sr-only" id="${file}">
+        <label for="${file}">
+          <img src="${imagesDir}/${file}" alt="${file}">
+        </label>`
+      });
+    
+      res.send(options);
+    });
+  });
 
 let connectedUsers = {};
 let lastUser = "";
@@ -56,7 +85,8 @@ io.on("connection", (socket) => {
         msg.name = connectedUsers[socket.id];
            if (lastUser != socket.id)
         {
-            io.in(msg.room).emit('pseudo_message', msg.name);
+            console.log(msg.image)
+            io.in(msg.room).emit('pseudo_message', msg);
             lastUser = socket.id;
         }
             io.in(msg.room).emit('concat_message', msg.message);
