@@ -56,6 +56,13 @@ main {
       border-bottom: 1px solid gray;
 }
 
+#messages li p {
+      font-weight: bold;
+      font-size: 15px;
+      text-decoration: underline;
+      display: inline;
+}
+
 #feedback {
       position: absolute;
       bottom: 0;
