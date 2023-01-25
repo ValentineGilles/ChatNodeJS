@@ -34,40 +34,40 @@ io.on('connection', (socket) => {
       for (usr in connectedUsers){
         if(firstWord==connectedUsers[usr]){
           newmsg=msg.slice(msg.indexOf(" "), msg.length)
-          io.to(usr).emit('chat message', connectedUsers[socket.id]+'is whispering  : '+newmsg)
-          io.to(socket.id).emit('chat message', 'You Whispered to '+connectedUsers[usr]+ " : "+newmsg)
+          io.to(usr).broadcast.emit('chat message', connectedUsers[socket.id]+'is whispering  : '+newmsg)
+          io.to(socket.id).broadcast.emit('chat message', 'You Whispered to '+connectedUsers[usr]+ " : "+newmsg)
         }
       }
     }
     else{
       if (last_user != socket.id)
       {
-        io.emit('pseudo message', connectedUsers[socket.id]);
+        io.broadcast.emit('pseudo message', connectedUsers[socket.id]);
         last_user = socket.id;
-        io.emit('concat message', msg);
+        io.broadcast.emit('concat message', msg);
       }
       else
       {
-        io.emit('concat message', msg)
+        io.broadcast.emit('concat message', msg)
       }
     }
   });
 
   socket.on('auto message', (msg) => {
-    io.emit('auto message', msg);
+    io.broadcast.emit('auto message', msg);
   });
 
   socket.on('disconnect', () => {
-    io.emit('auto message', connectedUsers[socket.id] + " vient de se déconnecter.");
+    io.broadcast.emit('auto message', connectedUsers[socket.id] + " vient de se déconnecter.");
     delete connectedUsers[socket.id];
-    io.emit('update online users', connectedUsers);
+    io.broadcast.emit('update online users', connectedUsers);
   });
 
   socket.on('addUser', (nickname) => {
     lastname=connectedUsers[socket.id];
     connectedUsers[socket.id] = nickname;
-    io.emit('auto message', connectedUsers[socket.id] +" vient de se connecter.");
-    io.emit('update online users', connectedUsers);
+    io.broadcast.emit('auto message', connectedUsers[socket.id] +" vient de se connecter.");
+    io.broadcast.emit('update online users', connectedUsers);
   });
 
   socket.on("typing", () => {
@@ -75,7 +75,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('concat message', (msg) => {
-    io.emit('concat message', msg);
+    io.broadcast.emit('concat message', msg);
   });
 });
 
