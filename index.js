@@ -66,7 +66,6 @@ io.on('connection', (socket) => {
   socket.on('addUser', (nickname) => {
     lastname=connectedUsers[socket.id];
     connectedUsers[socket.id] = nickname;
-    io.emit("logged");
     io.emit('auto message', connectedUsers[socket.id] +" vient de se connecter.");
     io.emit('update online users', connectedUsers);
   });

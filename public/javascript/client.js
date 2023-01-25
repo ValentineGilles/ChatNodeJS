@@ -12,13 +12,11 @@ var loginform = document.getElementById("loginform");
 loginform.addEventListener('submit', function(e) {
     e.preventDefault();
     socket.emit('addUser', nameinput.value);
-    name.value=''
+    nameinput.value=''
+    login.style.display='none';
 
 });
 
-socket.on('logged',function() {
-  login.style.display='none';
-});
 
 form.addEventListener('submit', function (e) {
   e.preventDefault();
