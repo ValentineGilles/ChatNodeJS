@@ -69,28 +69,17 @@ window.onload = () => {
             var clickedItemId = event.target;
             if(!clickedItemId.classList.contains("active")){
                 // On récupère l'élément actuellement actif et on échange le niveau d'activité
-                /*const actif = document.querySelector("#tabs li.active");
+                const actif = document.querySelector("#tabs li.active");
                 actif.classList.remove("active");
-                clickedItemId.classList.add("active");*/
+                clickedItemId.classList.add("active");
                 document.querySelector("#messages").innerHTML = "";
-                /*
+                
                 // On quitte l'ancienne salle
                 socket.emit("leave_room", actif.dataset.room);
                 // On entre dans la nouvelle salle
-                socket.emit("enter_room", clickedItemId.dataset.room);*/
+                socket.emit("enter_room", clickedItemId.dataset.room);
             }
         });
-
-        socket.on("change_room", newroom => {
-          var room = document.querySelector('[data-room="' + newroom + '"]');
-          const actif = document.querySelector("#tabs li.active");
-          actif.classList.remove("active");
-          room.classList.add("active");
-          console.log(room);
-          console.log(actif);
-          socket.emit("enter_room", room.dataset.room);
-          socket.emit("leave_room", actif.dataset.room);
-        })
 
         document.getElementById("tabs2").addEventListener("click", function(event){
           //  Si onglet pas actif
