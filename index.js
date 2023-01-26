@@ -34,12 +34,12 @@ app.get('/images', (req, res) => {
         return;
       }
     
-      let options = '<legend id="title">Please select your avatar</legend>';
+      let options = '<legend id="title">Choisissez votre avatar</legend>';
       files.forEach((file) => {
         options += 
         `<input type="radio" name="avatar" class="sr-only" id="${file}">
         <label for="${file}">
-          <img src="${imagesDir}/${file}" alt="${file}">
+          <img id = "choix-avatar" src="${imagesDir}/${file}" alt="${file}">
         </label>`
       });
     

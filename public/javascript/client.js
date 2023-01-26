@@ -41,7 +41,7 @@ window.onload = () => {
   socket.on('pseudo_message', (msg) => {
     var messages = document.getElementById('messages');
     var item = document.createElement('li');
-    item.innerHTML = "<p> <img src=Images/" + msg.image + ' id="imageAvatar"></img>' + msg.name + "</p> </br>";
+    item.innerHTML = "<p> <img src=Images/" + msg.image + ' id="image-avatar"></img>' + msg.name + "</p> </br>";
     messages.appendChild(item);
     window.scrollTo(0, document.body.scrollHeight);
   });

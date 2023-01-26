@@ -1,173 +1,211 @@
-body{
-      display: flex;
-      font-family: Arial, Helvetica, sans-serif;
-      background-color: #2F3136;
-  }
-  
-  aside{
-      flex: 1;
-  }
-  
-  main{
-      flex: 4;
-  }
-  
-  #tabs{
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-  }
+body {
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #2F3136;
+}
 
-  #ConnectedUsers
-  {
+aside {
+    flex: 1;
+}
+
+main {
+    flex: 4;
+}
+
+#tabs {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    height : 90%;
+    text-align : left;
+}
+
+#ConnectedUsers {
     height: 50%;
     color: white;
-  }
+    text-align: center;
+}
 
-  #Salons
-  {
+
+#Salons {
     height: 50%;
     color: white;
     list-style-type: none;
-  }
+    text-align: center;
+}
 
-  #tabs2{
+
+#tabs2 {
     list-style-type: none;
-      padding: 0;
-      margin: 0;
-  }
+    padding: 0;
+    margin: 0;
+    height: 90%;
+    text-align : left;
+}
 
-  #tabs2 li{
+#tabs2 li {
     padding: 10px;
 }
-  
-  #tabs li{
-      padding: 10px;
-  }
-  
-  #tabs li.active{
-      background-color: #393c43;
-      font-weight: bold;
-  }
-  
-  #tabs li:not(.active){
-      cursor: pointer;
-  }
-  
-  #content{
-      height: 90vh;
-      position: relative;
-  }
-  
-  #messages{
-      height: 100%;
-      background-color: #393c43;
-      overflow-y: scroll;
-  }
-  
-  #writing{
-      position: absolute;
-      bottom: 0;
-      background-color: #393c43;
-      color: white;
-  }
-  
-  #messages {
-      list-style-type: none;
-      height: 100%;
-      background-color: #393c43;
-      overflow-y: scroll;
-      color: aliceblue;
-  }
-  
-  #messages li {
-      padding-top: 20px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid gray;
-  }
-  
-  #messages li p {
-      font-weight: bold;
-      font-size: 15px;
-      text-decoration: underline;
-      display: inline;
-  }
-  
-  form{
-      display: flex;
-  }
-  
-  #name, #message{
-      padding: 10px;
-      background-color: #40444b;
-      color: white;
-      border: none;
-  }
-  #name{
-      flex: 1;
-  
-  }
-  #message{
-      flex: 5;
-  }
-  button{
-      flex: 1;
-      padding: 10px;
-      border: none;
-      background-color: #839c49;
-      color: white;
-  }
-  
-  
-  #login{
-      position: absolute;
+
+#tabs li {
+    padding: 10px;
+
+}
+
+#tabs li.active {
+    background-color: #393c43;
+    font-weight: bold;
+}
+
+#tabs li:not(.active) {
+    cursor: pointer;
+}
+
+#content {
+    height: 90vh;
+    position: relative;
+}
+
+#messages {
+    height: 100%;
+    background-color: #393c43;
+    overflow-y: scroll;
+}
+
+#writing {
+    position: absolute;
+    bottom: 0;
+    background-color: #393c43;
+    color: white;
+}
+
+#messages {
+    list-style-type: none;
+    height: 100%;
+    background-color: #393c43;
+    overflow-y: scroll;
+    color: aliceblue;
+}
+
+#messages li {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid gray;
+}
+
+#messages li p {
+    font-weight: bold;
+    font-size: 15px;
+    text-decoration: underline;
+    display: inline;
+}
+
+form {
+    display: flex;
+}
+
+#name,
+#message {
+    padding: 10px;
+    background-color: #40444b;
+    color: white;
+    border: none;
+}
+
+#name {
+    flex: 1;
+
+}
+
+#message {
+    flex: 5;
+}
+
+button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background-color: #839c49;
+    color: white;
+}
+
+
+#login {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(50, 50, 50, 0.8);
-  }
-  
-  #loginform{
-      position: absolute;
-      top: 40%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      display: inline-block;
-  }
-  
-  #Welcome{
-      color:white;
-  }
+}
 
-  label {
+#loginform {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+}
+
+#Welcome {
+    color: white;
+    text-align: center;
+}
+
+label {
     cursor: pointer;
     filter: grayscale(100%);
-  }
-  
-  label:hover {
-    filter: grayscale(0);
-  }
-  
-  input[type="radio"]:checked + label {
-    filter: grayscale(0);
-  }
+}
 
-  .sr-only{
+label:hover {
+    filter: grayscale(0);
+}
+
+input[type="radio"]:checked+label {
+    filter: grayscale(0);
+}
+
+.sr-only {
     display: none;
-  }
+}
 
-  #imageAvatar{
+#image-avatar {
     width: 2%;
     height: 2%;
-  }
+}
 
-  #title{
+#choix-avatar{
+    width: 15%;
+    height: 15%;
+}
+
+#title {
     color: white;
-  }
+}
 
-  #nameuser{
+#nameuser {
     position: absolute;
     right: 40%;
-    color:white;
-  }
+    color: white;
+}
+
+.scroller {
+    width: 300px;
+    height: 100px;
+    overflow: scroll;
+}
+
+.scroller::-webkit-scrollbar {
+    width: 0.2em;
+    height: 100%;
+    background-color: transparent;
+}
+
+.scroller::-webkit-scrollbar-thumb {
+  background-color: #40444b;
+}
+
+#choix-pseudo{
+    margin-top: 10% ;
+    text-align: center;
+}
