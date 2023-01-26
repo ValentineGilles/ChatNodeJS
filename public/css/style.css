@@ -104,11 +104,12 @@ body{
     left: 0;
     width: 100%;
     height: 100%;
+    background-color: rgba(50, 50, 50, 0.8);
   }
   
   #loginform{
       position: absolute;
-      top: 50%;
+      top: 40%;
       left: 50%;
       transform: translate(-50%, -50%);
       display: inline-block;
@@ -130,8 +131,15 @@ body{
     filter: grayscale(0);
   }
 
+  .sr-only{
+    display: none;
+  }
 
   #imageAvatar{
     width: 2%;
     height: 2%;
+  }
+
+  #title{
+    color: white;
   }

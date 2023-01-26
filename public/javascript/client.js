@@ -4,12 +4,16 @@ const socket = io();
 window.onload = () => {
     
     loginform.addEventListener('submit', function(e) {
-        const room = document.querySelector("#tabs li.active").dataset.room;
-        var selectedButton = document.querySelector("input[name='avatar']:checked");
+        if (nameinput.value !=""){
+          const room = document.querySelector("#tabs li.active").dataset.room;
+          var selectedButton = document.querySelector("input[name='avatar']:checked");
           e.preventDefault();
           socket.emit('addUser', {name : nameinput.value, room : room, image : selectedButton.id});
           nameinput.value=''
           login.style.display='none';
+        }
+        else
+          alert("Nom d'utilisateur vide")
       });
 
     // On écoute l'évènement submit

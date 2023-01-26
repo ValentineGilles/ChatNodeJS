@@ -34,7 +34,7 @@ app.get('/images', (req, res) => {
         return;
       }
     
-      let options = '<legend>Please select your avatar</legend>';
+      let options = '<legend id="title">Please select your avatar</legend>';
       files.forEach((file) => {
         options += 
         `<input type="radio" name="avatar" class="sr-only" id="${file}">
@@ -95,6 +95,7 @@ io.on("connection", (socket) => {
         socket.to(room).emit("usertyping", connectedUsers[socket.id].name);
     })
 
+    // On ajoute un utilisateur a la liste et on lui affect la room general de base
     socket.on('addUser', (info) => {
         lastname=connectedUsers[socket.id];
         connectedUsers[socket.id] = info;
