@@ -4,7 +4,7 @@
 
 ## Quelque images de l'application
 
-![alt text](https://devops.telecomste.fr/rodrigues.hugo/nodejs-pls/-/blob/main/READMEimage/Capture.PNG?raw=true)
+![alt text](READMEimage\Capture.PNG)
 
 mettre des images
 
