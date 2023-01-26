@@ -3,10 +3,18 @@
 
 
 ## Quelque images de l'application
+ - Connexion
 
-![alt text](https://zupimages.net/up/23/04/1mxi.png)
+![alt text](https://zupimages.net/up/23/04/31jz.png)
 
-mettre des images
+ - Chat General
+
+![alt text](https://zupimages.net/up/23/04/aj0a.png)
+
+ - Chat privé
+
+![alt text](https://zupimages.net/up/23/04/bvn8.png)
+
 
 ## Lancement de l'application
 ```
