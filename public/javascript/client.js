@@ -39,7 +39,7 @@ window.onload = () => {
     socket.on('pseudo_message', (msg) =>{
         var messages = document.getElementById('messages');
         var item = document.createElement('li');
-        item.innerHTML = "<p> <img src=Images/"+msg.image+' id="imageAvatar"></img>'+ msg.name + "</p> </br>";
+        item.innerHTML = "<p> <img src=Images/"+ msg.image+' id="imageAvatar"></img>'+ msg.name + "</p> </br>";
         messages.appendChild(item);
         window.scrollTo(0, document.body.scrollHeight);
       });
@@ -73,11 +73,18 @@ window.onload = () => {
                 actif.classList.remove("active");
                 clickedItemId.classList.add("active");
                 document.querySelector("#messages").innerHTML = "";
+                
                 // On quitte l'ancienne salle
                 socket.emit("leave_room", actif.dataset.room);
                 // On entre dans la nouvelle salle
                 socket.emit("enter_room", clickedItemId.dataset.room);
             }
+        });
+
+        document.getElementById("tabs2").addEventListener("click", function(event){
+          //  Si onglet pas actif
+          var clickedItemId = event.target.id;
+          socket.emit("create_room", clickedItemId);
         });
 
     // On écoute la frappe au clavier
@@ -99,15 +106,25 @@ window.onload = () => {
     });
 
     socket.on('update online users', (onlineUsers) => {
-        const onlineUsersList = document.getElementById('tabs');
-        onlineUsersList.innerHTML = '<li class="active" data-room="general">Général</li>';
+        const onlineUsersList = document.getElementById('tabs2');
+        onlineUsersList.innerHTML = ' ';
         for (let userId in onlineUsers) {
           const username = onlineUsers[userId].name;
           const li = document.createElement("li");
-          li.dataset.room = userId;
+          li.id= userId;
           li.innerHTML = "🟢  " + username;
           onlineUsersList.appendChild(li);
         }});
+
+
+      socket.on('update_rooms', (room) => {
+        const rooms = document.getElementById('tabs');
+        const li = document.createElement("li");
+        li.dataset.room= room;
+        li.innerHTML = room ;
+        rooms.appendChild(li);
+        });
+
 
     // lecture et affichage de toutes les images dans l'ecran d'acceuil
     fetch('/images')

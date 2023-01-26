@@ -17,11 +17,32 @@ body{
       padding: 0;
       margin: 0;
   }
+
+  #ConnectedUsers
+  {
+    height: 50%;
+    color: white;
+  }
+
+  #Salons
+  {
+    height: 50%;
+    color: white;
+    list-style-type: none;
+  }
+
+  #tabs2{
+    list-style-type: none;
+      padding: 0;
+      margin: 0;
+  }
+
+  #tabs2 li{
+    padding: 10px;
+}
   
   #tabs li{
       padding: 10px;
-      color: white;
-      text-transform: lowercase;
   }
   
   #tabs li.active{
@@ -127,6 +148,7 @@ body{
   label:hover {
     filter: grayscale(0);
   }
+  
   input[type="radio"]:checked + label {
     filter: grayscale(0);
   }
