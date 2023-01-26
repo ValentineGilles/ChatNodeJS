@@ -68,21 +68,39 @@ io.on("connection", (socket) => {
         // On entre dans la salle demandée
         socket.join(room);
         socket.in(room).emit('auto_message', connectedUsers[socket.id].name + " vient de se connecter.");
+        console.log(connectedUsers[socket.id].room);
     });
+
 
     // On écoute les sorties dans les salles
     socket.on("leave_room", (room) => {
         // On entre dans la salle demandée
         socket.leave(room);
         lastUser = "";
+        console.log(connectedUsers[socket.id].room);
+    });
+    
+
+    socket.on("create_room", (UserId) => {;
+      room = connectedUsers[UserId].name + "/" + connectedUsers[socket.id].name;
+      //UserId.join(room);
+      io.emit('update_rooms', room);
+      socket.emit('change_room', room)
     });
 
     // On gère le chat
     socket.on("chat_message", (msg) => {
         // On stocke le message dans la base
+
+        /*socket id, msg.room
+        room à l'id de la personne à qui on veut envoyer
+        */
+
         msg.name = connectedUsers[socket.id];
            if (lastUser != socket.id)
         {
+          console.log(connectedUsers[socket.id].name + " : " + socket.id);
+          console.log(msg.room + " : " + msg.room);
             io.in(msg.room).emit('pseudo_message', connectedUsers[socket.id]);
             lastUser = socket.id;
         }
