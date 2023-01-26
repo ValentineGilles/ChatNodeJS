@@ -2,7 +2,7 @@
 
 
 
-## Quelque images de l'application
+## Quelques images de l'application
  - Connexion
 
 ![alt text](https://zupimages.net/up/23/04/31jz.png)
@@ -21,7 +21,7 @@
 git clone git@devops.telecomste.fr:rodrigues.hugo/nodejs-pls.git
 cd NODEJS-PLS
 npm install socket.io
-node index.js
+node server.js
 ```
 Il ne reste plus qu'a lancer http://localhost:3000
 
