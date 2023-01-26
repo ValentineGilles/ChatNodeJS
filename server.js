@@ -131,6 +131,10 @@ io.on("connection", (socket) => {
     io.emit('update online users', connectedUsers); // MAJ des utilisateurs connectés
   });
 
+  //Envoi du son a tout les utilisateurs sauf lui même
+  socket.on ('son',()=>{
+    socket.broadcast.emit('son');
+  })
 });
 
 // Le serveur écoute le port 3000

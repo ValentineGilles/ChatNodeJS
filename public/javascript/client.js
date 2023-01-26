@@ -13,11 +13,18 @@ window.onload = () => {
       nameuser.innerHTML="Bienvenue "+nameinput.value;// Affichage du nom chosit par l'utilisateur
       nameinput.value = ''
       login.style.display = 'none';
+      socket.emit("son");// On envoie une requete à tout les utilisateur pour dire qu'un utilisateur se connecte
     }
     else
-      alert("Nom d'utilisateur vide")
+      alert("Nom d'utilisateur vide");
   });
 
+  // Si on reçoit une requete 'son' alors on lance le son de l'audio 
+  socket.on('son',()=>{
+    var audio = document.querySelector("#my-audio");
+    audio.play();
+  })
+  
   // On écoute l'évènement submit
   document.querySelector("form").addEventListener("submit", (e) => {
     // On empêche l'envoi du formulaire
