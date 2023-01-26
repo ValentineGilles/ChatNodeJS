@@ -48,8 +48,9 @@ window.onload = () => {
   socket.on('pseudo_message', (msg) => {
     var messages = document.getElementById('messages');
     var item = document.createElement('li');
+    let date = new Date(msg.heure);
     //On affiche l'image et le nom de l'utilisateur en premier
-    item.innerHTML = "<div id='pseudo'><img src=Images/" + msg.image + ' id="image-avatar"></img><p>'  + msg.name + "</p></div>";
+    item.innerHTML = "<div id='pseudo'><small>" + date.toLocaleDateString() + ' ' + date.toLocaleTimeString() +"</small></br><img src=Images/" + msg.user.image + ' id="image-avatar"></img><p>'  + msg.user.name + "</p> </div>";
     messages.appendChild(item);
     window.scrollTo(0, document.body.scrollHeight);
   });

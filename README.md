@@ -40,7 +40,9 @@ Il ne reste plus qu'à ouvrir la page suivante : http://localhost:3000
   - Envoyer un __message dans un salon général__ : tout le monde peut se connecter à ce salon. C'est le salon par défaut à la connexion.
   - Envoyer un __message privé__ en cliquant sur le nom d'utilisateur de la personne : un salon uniquement visible par ces deux personnes est crée.
   - __Concaténation des messages__ si une personne envoie plusieurs messages d'affilés.
+  - __Heure d'envoi__ du message indiqué.
   - __Message de connexion et de déconnexion__ d'un utilisateur sur le chat général.
+  - __Notification sonore__ lorsqu'un utilisateur se connecte.
   - __Message lorsque quelqu'un rejoint un salon privé__.
   - __Liste de toutes les personnes connectées__.
   - Information lorsque __quelqu'un écrit un message__.
