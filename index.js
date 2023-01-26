@@ -2,6 +2,9 @@
 const express = require("express");
 const app = express();
 
+// On charge "fs"
+const fs = require('fs');
+
 // On charge "path"
 const path = require("path");
 
@@ -19,12 +22,36 @@ app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
 });
 
+//On initialise le chemin du dossier
+const imagesDir = 'Images';
+
+// On lit toutes les images dans notre dossier pour les afficher 
+app.get('/images', (req, res) => {
+    fs.readdir(imagesDir, (err, files) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send(err);
+        return;
+      }
+    
+      let options = '<legend id="title">Please select your avatar</legend>';
+      files.forEach((file) => {
+        options += 
+        `<input type="radio" name="avatar" class="sr-only" id="${file}">
+        <label for="${file}">
+          <img src="${imagesDir}/${file}" alt="${file}">
+        </label>`
+      });
+    
+      res.send(options);
+    });
+  });
+
 let connectedUsers = {};
 let lastUser = "";
 
 // On écoute l'évènement "connection" de socket.io
 io.on("connection", (socket) => {
-    
     // On écoute les déconnexions
     socket.on("disconnect", () => {
         io.emit('auto_message', connectedUsers[socket.id] + " vient de se déconnecter.");
@@ -40,7 +67,7 @@ io.on("connection", (socket) => {
     socket.on("enter_room", (room) => {
         // On entre dans la salle demandée
         socket.join(room);
-        socket.in(room).emit('auto_message', connectedUsers[socket.id] + " vient de se connecter.");
+        socket.in(room).emit('auto_message', connectedUsers[socket.id].name + " vient de se connecter.");
     });
 
     // On écoute les sorties dans les salles
@@ -56,7 +83,7 @@ io.on("connection", (socket) => {
         msg.name = connectedUsers[socket.id];
            if (lastUser != socket.id)
         {
-            io.in(msg.room).emit('pseudo_message', msg.name);
+            io.in(msg.room).emit('pseudo_message', connectedUsers[socket.id]);
             lastUser = socket.id;
         }
             io.in(msg.room).emit('concat_message', msg.message);
@@ -65,14 +92,15 @@ io.on("connection", (socket) => {
 
     // On écoute les messages "typing"
     socket.on("typing", room => {
-        socket.to(room).emit("usertyping", connectedUsers[socket.id]);
+        socket.to(room).emit("usertyping", connectedUsers[socket.id].name);
     })
 
+    // On ajoute un utilisateur a la liste et on lui affect la room general de base
     socket.on('addUser', (info) => {
         lastname=connectedUsers[socket.id];
-        connectedUsers[socket.id] = info.name;
-        socket.emit("enter_room", info.room);
-        io.emit('auto_message', connectedUsers[socket.id] +" vient de se connecter.");
+        connectedUsers[socket.id] = info;
+        socket.join(connectedUsers[socket.id].room);
+        io.emit('auto_message', connectedUsers[socket.id].name +" vient de se connecter.");
         io.emit('update online users', connectedUsers);
     });
 
@@ -80,4 +108,5 @@ io.on("connection", (socket) => {
 
 // On va demander au serveur http de répondre sur le port 3000
 http.listen(3000, () => {
+    console.log('listening on http://localhost:3000');
 });

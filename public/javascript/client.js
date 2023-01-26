@@ -4,11 +4,16 @@ const socket = io();
 window.onload = () => {
     
     loginform.addEventListener('submit', function(e) {
-        const room = document.querySelector("#tabs li.active").dataset.room;
+        if (nameinput.value !=""){
+          const room = document.querySelector("#tabs li.active").dataset.room;
+          var selectedButton = document.querySelector("input[name='avatar']:checked");
           e.preventDefault();
-          socket.emit('addUser', {name : nameinput.value, room : room});
+          socket.emit('addUser', {name : nameinput.value, room : room, image : selectedButton.id});
           nameinput.value=''
           login.style.display='none';
+        }
+        else
+          alert("Nom d'utilisateur vide")
       });
 
     // On écoute l'évènement submit
@@ -34,7 +39,7 @@ window.onload = () => {
     socket.on('pseudo_message', (msg) =>{
         var messages = document.getElementById('messages');
         var item = document.createElement('li');
-        item.innerHTML = "<p>" + msg + "</p> </br>";
+        item.innerHTML = "<p> <img src=Images/"+msg.image+' id="imageAvatar"></img>'+ msg.name + "</p> </br>";
         messages.appendChild(item);
         window.scrollTo(0, document.body.scrollHeight);
       });
@@ -97,12 +102,19 @@ window.onload = () => {
         const onlineUsersList = document.getElementById('tabs');
         onlineUsersList.innerHTML = '<li class="active" data-room="general">Général</li>';
         for (let userId in onlineUsers) {
-          const username = onlineUsers[userId];
+          const username = onlineUsers[userId].name;
           const li = document.createElement("li");
           li.dataset.room = userId;
           li.innerHTML = "🟢  " + username;
           onlineUsersList.appendChild(li);
         }});
 
+    // lecture et affichage de toutes les images dans l'ecran d'acceuil
+    fetch('/images')
+    .then((response) => response.text())
+    .then((options) => {
+      var pictures=document.getElementById('pictures')
+      pictures.innerHTML = options;
+    });
 
 }
