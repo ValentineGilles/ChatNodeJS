@@ -54,7 +54,7 @@ let lastUser = "";
 io.on("connection", (socket) => {
     // On écoute les déconnexions
     socket.on("disconnect", () => {
-        io.emit('auto_message', connectedUsers[socket.id] + " vient de se déconnecter.");
+        io.to(connectedUsers[socket.id].room).emit('auto_message', connectedUsers[socket.id].name + " vient de se déconnecter.");
         delete connectedUsers[socket.id];
         io.emit('update online users', connectedUsers);
         });
@@ -120,7 +120,7 @@ io.on("connection", (socket) => {
         lastname=connectedUsers[socket.id];
         connectedUsers[socket.id] = info;
         socket.join(connectedUsers[socket.id].room);
-        io.emit('auto_message', connectedUsers[socket.id].name +" vient de se connecter.");
+        io.to(connectedUsers[socket.id].room).emit('auto_message', connectedUsers[socket.id].name +" vient de se connecter.");
         io.emit('update online users', connectedUsers);
     });
 
