@@ -237,4 +237,5 @@ input[type="radio"]:checked+label {
 #nameinput{
     background-color: #393c43;
     overflow-y: scroll;
+    color :white;
 }
