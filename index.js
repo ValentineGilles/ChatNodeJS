@@ -1,89 +1,112 @@
-const express = require('express');
-const { lstatSync } = require('fs');
+// On instancie express
+const express = require("express");
 const app = express();
+
+// On charge "fs"
+const fs = require('fs');
+
+// On charge "path"
 const path = require("path");
+
+// On autorise le dossier "public"
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(express.static(path.join(__dirname, "public/javascript"), {
-  setHeaders: (res) => {
-    res.set('Content-Type', 'application/javascript');
-  },
-}));
+// On crée le serveur http
+const http = require("http").createServer(app);
 
+// On instancie socket.io
+const io = require("socket.io")(http);
 
-const http = require('http');
-const { waitForDebugger } = require('inspector');
-const server = http.createServer(app);
-const { Server } = require("socket.io");
-
-const io = new Server(server);
-
-
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+// On crée la route /
+app.get("/", (req, res) => {
+    res.sendFile(__dirname + "/index.html");
 });
+
+//On initialise le chemin du dossier
+const imagesDir = 'Images';
+
+// On lit toutes les images dans notre dossier pour les afficher 
+app.get('/images', (req, res) => {
+    fs.readdir(imagesDir, (err, files) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send(err);
+        return;
+      }
+    
+      let options = '<legend id="title">Please select your avatar</legend>';
+      files.forEach((file) => {
+        options += 
+        `<input type="radio" name="avatar" class="sr-only" id="${file}">
+        <label for="${file}">
+          <img src="${imagesDir}/${file}" alt="${file}">
+        </label>`
+      });
+    
+      res.send(options);
+    });
+  });
 
 let connectedUsers = {};
-let last_user = "";
+let lastUser = "";
 
-io.on('connection', (socket) => {
+// On écoute l'évènement "connection" de socket.io
+io.on("connection", (socket) => {
+    // On écoute les déconnexions
+    socket.on("disconnect", () => {
+        io.emit('auto_message', connectedUsers[socket.id] + " vient de se déconnecter.");
+        delete connectedUsers[socket.id];
+        io.emit('update online users', connectedUsers);
+        });
 
-  socket.on('chat message', (msg) => {
-    if (/^\//.test(msg)){
-      const firstWord = msg.slice(1, msg.indexOf(" "));
-      for (usr in connectedUsers){
-        if(firstWord==connectedUsers[usr]){
-          newmsg=msg.slice(msg.indexOf(" "), msg.length)
-          io.to(usr).emit('chat message', connectedUsers[socket.id]+'is whispering  : '+newmsg)
-          io.to(socket.id).emit('chat message', 'You Whispered to '+connectedUsers[usr]+ " : "+newmsg)
+    socket.on('auto_message', (msg) => {
+        io.broadcast.emit('auto_message', msg);
+        });
+
+    // On écoute les entrées dans les salles
+    socket.on("enter_room", (room) => {
+        // On entre dans la salle demandée
+        socket.join(room);
+        socket.in(room).emit('auto_message', connectedUsers[socket.id].name + " vient de se connecter.");
+    });
+
+    // On écoute les sorties dans les salles
+    socket.on("leave_room", (room) => {
+        // On entre dans la salle demandée
+        socket.leave(room);
+        lastUser = "";
+    });
+
+    // On gère le chat
+    socket.on("chat_message", (msg) => {
+        // On stocke le message dans la base
+        msg.name = connectedUsers[socket.id];
+           if (lastUser != socket.id)
+        {
+            io.in(msg.room).emit('pseudo_message', connectedUsers[socket.id]);
+            lastUser = socket.id;
         }
-      }
-    }
-    else{
-      if (last_user != socket.id)
-      {
-        io.emit('pseudo message', connectedUsers[socket.id]);
-        last_user = socket.id;
-        io.emit('concat message', msg);
-      }
-      else
-      {
-        io.emit('concat message', msg)
-      }
-    }
-  });
+            io.in(msg.room).emit('concat_message', msg.message);
+            //io.in(msg.room).emit("received_message", msg);
+    });
 
-  socket.on('auto message', (msg) => {
-    io.broadcast.emit('auto message', msg);
-  });
+    // On écoute les messages "typing"
+    socket.on("typing", room => {
+        socket.to(room).emit("usertyping", connectedUsers[socket.id].name);
+    })
 
-  socket.on('disconnect', () => {
-    io.emit('auto message', connectedUsers[socket.id] + " vient de se déconnecter.");
-    delete connectedUsers[socket.id];
-    io.emit('update online users', connectedUsers);
-  });
+    // On ajoute un utilisateur a la liste et on lui affect la room general de base
+    socket.on('addUser', (info) => {
+        lastname=connectedUsers[socket.id];
+        connectedUsers[socket.id] = info;
+        socket.join(connectedUsers[socket.id].room);
+        io.emit('auto_message', connectedUsers[socket.id].name +" vient de se connecter.");
+        io.emit('update online users', connectedUsers);
+    });
 
-  socket.on('addUser', (nickname) => {
-    lastname=connectedUsers[socket.id];
-    connectedUsers[socket.id] = nickname;
-    io.emit('auto message', connectedUsers[socket.id] +" vient de se connecter.");
-    io.emit('update online users', connectedUsers);
-  });
-
-  socket.on("typing", () => {
-    socket.broadcast.emit("typing",connectedUsers[socket.id]);
-  });
-
-  socket.on('concat message', (msg) => {
-    io.emit('concat message', msg);
-  });
 });
 
-server.listen(3000, () => {
-  console.log('listening on localhost:3000');
+// On va demander au serveur http de répondre sur le port 3000
+http.listen(3000, () => {
+    console.log('listening on http://localhost:3000');
 });
-
-
-
-
-io.emit('some event', { someProperty: 'some value', otherProperty: 'other value' });
