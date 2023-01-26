@@ -98,10 +98,9 @@ io.on("connection", (socket) => {
     socket.on('addUser', (info) => {
         lastname=connectedUsers[socket.id];
         connectedUsers[socket.id] = info;
-        socket.emit("enter_room", connectedUsers[socket.id].room);
+        socket.join(connectedUsers[socket.id].room);
         io.emit('auto_message', connectedUsers[socket.id].name +" vient de se connecter.");
         io.emit('update online users', connectedUsers);
-        socket.join("general");
     });
 
 });
