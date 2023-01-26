@@ -81,19 +81,26 @@ io.on("connection", (socket) => {
     });
     
 
-    socket.on("create_room", (UserId) => {
-      room = connectedUsers[UserId].name + "/" + connectedUsers[socket.id].name;
-      io.to(UserId).to(socket.id).emit('update_rooms', room);
+    socket.on("create_room", (info) => {
+      let roomExist = false;
+      room1 = connectedUsers[info.UserId].name + "/" + connectedUsers[socket.id].name;
+      room2 = connectedUsers[socket.id].name + "/" + connectedUsers[info.UserId].name;
+      for (let i = 0; i < info.lis.length; i++) {
+        console.log(info.lis[i]);
+        if(info.lis[i].dataset.room === room1 || info.lis[i].dataset.room === room2) {
+          roomExist = true;
+          break;
+        }
+      }
+      if(!roomExist) {
+        io.to(info.UserId).to(socket.id).emit('update_rooms', room1);
+      }
+      
     });
 
     // On gère le chat
     socket.on("chat_message", (msg) => {
         // On stocke le message dans la base
-
-        /*socket id, msg.room
-        room à l'id de la personne à qui on veut envoyer
-        */
-
         msg.name = connectedUsers[socket.id];
            if (lastUser != socket.id)
         {
