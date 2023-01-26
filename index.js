@@ -85,9 +85,8 @@ io.on("connection", (socket) => {
       let roomExist = false;
       room1 = connectedUsers[info.UserId].name + "/" + connectedUsers[socket.id].name;
       room2 = connectedUsers[socket.id].name + "/" + connectedUsers[info.UserId].name;
-      for (let i = 0; i < info.lis.length; i++) {
-        console.log(info.lis[i]);
-        if(info.lis[i].dataset.room === room1 || info.lis[i].dataset.room === room2) {
+      for (let i = 0; i < info.liste.length; i++) {
+        if(info.liste[i] === room1 || info.liste[i] === room2) {
           roomExist = true;
           break;
         }

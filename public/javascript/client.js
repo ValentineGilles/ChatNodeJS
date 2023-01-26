@@ -86,8 +86,12 @@ window.onload = () => {
     var UserId = event.target.id;
     const rooms = document.getElementById('tabs');
     const lis = rooms.getElementsByTagName("li");
-    console.log(lis.item);
-    socket.emit("create_room", {UserId, lis});
+    const liste = [];
+    for (let i = 0; i < lis.length; i++) {
+      liste.push(lis[i].dataset.room)
+    }
+
+    socket.emit("create_room", {UserId, liste});
   });
 
   // On écoute la frappe au clavier 
