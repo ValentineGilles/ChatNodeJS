@@ -1,43 +1,54 @@
-# nodeJs - PLS
+# Lancement de l'application
 
+- Sur Git :
+```
+git clone git@devops.telecomste.fr:rodrigues.hugo/nodejs-pls.git
+```
 
-## Quelques images de l'application
- - Connexion
+- Dans le terminal de votre IDE :
+
+```
+cd nodejs-pls
+npm init
+node server.js
+```
+
+Il ne reste plus qu'à ouvrir la page suivante : http://localhost:3000
+
+# Quelques images de l'application
+ 
+ ## Connexion au chat
 
 <img src="https://zupimages.net/up/23/04/31jz.png">
 
- - Chat General
+
+ ## Chat Général
 
 <img src="https://zupimages.net/up/23/04/aj0a.png">
 
- - Chat privé
+
+ ## Chat privé
 
 <img src="https://zupimages.net/up/23/04/bvn8.png">
 
 
-## Lancement de l'application
-```
-git clone git@devops.telecomste.fr:rodrigues.hugo/nodejs-pls.git
-cd NODEJS-PLS
-npm install socket.io
-node server.js
-```
-Il ne reste plus qu'a lancer http://localhost:3000
 
 
-## Fonctionalité
+# Fonctionalités implémentés
 
-  - Création d'un utilisateur (choix du nom/image d'utilisateur)
-  - Envoyer un message dans un salon general 
-  - Envoyer un message privé en cliquant sur le nom d'utilisateur de la personne
-  - Concaténation des messages si un même personne parle
-  - Message de connexion et de déconnexion automatique
-  - Message lorsque quelqu'un rejoint un salon
-  - Liste de toutes les personnes connecté 
-  - Information lorsque quelqu'un écrit un message
+  - __Création d'un utilisateur__ à la connexion : choix du nom/image d'utilisateur
+  - Envoyer un __message dans un salon général__ : tout le monde peut se connecter à ce salon. C'est le salon par défaut à la connexion.
+  - Envoyer un __message privé__ en cliquant sur le nom d'utilisateur de la personne : un salon uniquement visible par ces deux personnes est crée.
+  - __Concaténation des messages__ si une personne envoie plusieurs messages d'affilés.
+  - __Message de connexion et de déconnexion__ d'un utilisateur sur le chat général.
+  - __Message lorsque quelqu'un rejoint un salon privé__.
+  - __Liste de toutes les personnes connectées__.
+  - Information lorsque __quelqu'un écrit un message__.
 
 
-## Avec plus de temps
+# Fonctionnalités qu'on aurait aimé ajouté avec plus de temps
 
-  - Ajout d'une base de donnée qui aurait pu gérer les compte utilisateur
-  - Sauvegarde des anciens messages
+  - Meilleure utilisation du __broadcast__, ici très peu utilisée, et rendue plus complexe par la concaténation des messages.
+  - Création d'une __base de données__ (SQLite) pour créer des __comptes utilisateurs__ et __sauvegarder les anciens messages__.
+  - Créations de __salons privés pour plus de deux personnes__.
+  - Ajout de __son propre avatar__.
