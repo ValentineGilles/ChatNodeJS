@@ -145,7 +145,7 @@ button {
     flex: 1;
     padding: 10px;
     border: none;
-    background-color: #839c49;
+    background-color: #7681e4;
     color: white;
 }
 
@@ -224,4 +224,17 @@ input[type="radio"]:checked+label {
 #choix-pseudo{
     margin-top: 10% ;
     text-align: center;
+}
+
+#submit-form-button{
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background-color: #7681e4;
+    color: white;
+}
+
+#nameinput{
+    background-color: #393c43;
+    overflow-y: scroll;
 }

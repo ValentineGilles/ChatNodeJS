@@ -2,15 +2,15 @@
 const socket = io();
 
 window.onload = () => {
-
+  // Lorsque l'on appui sur le premier boutton envoyer on récupère les donner du forme et on les stocke dans un tableau
   loginform.addEventListener('submit', function (e) {
-    if (nameinput.value != "") {
+    if (nameinput.value != "") {// Si la valeur est vide on envoie une alert
       const room = document.querySelector("#tabs li.active").dataset.room;
       var nameuser = document.querySelector("#nameuser");
       var selectedButton = document.querySelector("input[name='avatar']:checked");
       e.preventDefault();
-      socket.emit('addUser', { name: nameinput.value, room: room, image: selectedButton.id });
-      nameuser.innerHTML=nameinput.value;
+      socket.emit('addUser', { name: nameinput.value, room: room, image: selectedButton.id });// Stockage des données
+      nameuser.innerHTML=nameinput.value;// Affichage du nom chosit par l'utilisateur
       nameinput.value = ''
       login.style.display = 'none';
     }
@@ -41,6 +41,7 @@ window.onload = () => {
   socket.on('pseudo_message', (msg) => {
     var messages = document.getElementById('messages');
     var item = document.createElement('li');
+    //On affiche l'image et le nom de l'utilisateur en premier
     item.innerHTML = "<div id='pseudo'><img src=Images/" + msg.image + ' id="image-avatar"></img><p>'  + msg.name + "</p></div>";
     messages.appendChild(item);
     window.scrollTo(0, document.body.scrollHeight);
@@ -56,12 +57,12 @@ window.onload = () => {
     window.scrollTo(0, document.body.scrollHeight);
   });
 
-  // Message auto
+  // Message auto de connexion et de déconnexion
   socket.on('auto_message', function (msg) {
     var messages = document.getElementById('messages');
     var item = document.createElement('li');
     item.innerHTML = msg;
-    messages.appendChild(item);
+    messages.appendChild(item);// On ajoute notre message 
     window.scrollTo(0, document.body.scrollHeight);
   });
 
@@ -83,16 +84,19 @@ window.onload = () => {
     }
   });
 
+  // Quand on click sur une personne connecté alors on crée un onglet de message privé entre les deux personnes
   document.getElementById("tabs2").addEventListener("click", function (event) {
     //  Si onglet pas actif
     var UserId = event.target.id;
     const rooms = document.getElementById('tabs');
     const lis = rooms.getElementsByTagName("li");
+    // On stocke les donnée de la room dans la lsite
     const liste = [];
     for (let i = 0; i < lis.length; i++) {
       liste.push(lis[i].dataset.room)
     }
 
+    // On crée la salle privé
     socket.emit("create_room", {UserId, liste});
   });
 
@@ -107,16 +111,19 @@ window.onload = () => {
   socket.on("usertyping", user => {
     const writing = document.querySelector("#writing");
 
-    writing.innerHTML = `${user} tape un message...`;
+    writing.innerHTML = `${user} tape un message...`;// On affiche quel personne est entrain d'écrire
 
+    // On laisse afficher 5 seconde le message après il disparait
     setTimeout(function () {
       writing.innerHTML = "";
     }, 5000);
   });
 
+  // On met a jours la liste d'utilisateur connecter
   socket.on('update online users', (onlineUsers) => {
     const onlineUsersList = document.getElementById('tabs2');
     onlineUsersList.innerHTML = ' ';
+    // On regarde toutes les personnes connectées et on les ajoute à la liste
     for (let userId in onlineUsers) {
       const username = onlineUsers[userId].name;
       const li = document.createElement("li");
@@ -127,6 +134,7 @@ window.onload = () => {
   });
 
 
+  // On ajoute une room à la liste
   socket.on('update_rooms', (room) => {
     const rooms = document.getElementById('tabs');
     const li = document.createElement("li");

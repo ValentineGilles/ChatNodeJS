@@ -3,10 +3,18 @@
 
 
 ## Quelque images de l'application
+ - Connexion
 
-![alt text](https://zupimages.net/up/23/04/1mxi.png)
+![alt text](https://zupimages.net/up/23/04/31jz.png)
 
-mettre des images
+ - Chat General
+
+![alt text](https://zupimages.net/up/23/04/aj0a.png)
+
+ - Chat privé
+
+![alt text](https://zupimages.net/up/23/04/bvn8.png)
+
 
 ## Lancement de l'application
 ```
@@ -22,4 +30,8 @@ Il ne reste plus qu'a lancer http://localhost:3000
   - création d'un utilisateur (choix du nom/image d'utilisateur)
   - envoyer un message dans un salon general 
   - envoyer un message privé en cliquant sur le nom d'utilisateur de la personne
-  - 
+  - concaténation des messages si un même personne parle
+  - message de connexion et de déconnexion automatique
+  - message lorsque quelqu'un rejoint un salon
+  - liste de toutes les personnes connecté 
+  - information lorsque quelqu'un écrit un message
