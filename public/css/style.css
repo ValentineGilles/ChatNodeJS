@@ -129,3 +129,9 @@ body{
   input[type="radio"]:checked + label {
     filter: grayscale(0);
   }
+
+
+  #imageAvatar{
+    width: 2%;
+    height: 2%;
+  }
