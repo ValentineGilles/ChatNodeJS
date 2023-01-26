@@ -4,7 +4,7 @@
 ## Quelques images de l'application
  - Connexion
 
-<img src="https://zupimages.net/up/23/04/31jz.png" width="1200" height="700">
+<img src="https://zupimages.net/up/23/04/31jz.png">
 
  - Chat General
 
