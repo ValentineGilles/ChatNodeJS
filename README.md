@@ -22,14 +22,14 @@ Il ne reste plus qu'à ouvrir la page suivante : http://localhost:3000
 <img src="https://zupimages.net/up/23/04/31jz.png">
 
 
- ## Chat Général
+ ## Chat général
 
-<img src="https://zupimages.net/up/23/04/aj0a.png">
+<img src="https://zupimages.net/up/23/04/gq50.jpg">
 
 
  ## Chat privé
 
-<img src="https://zupimages.net/up/23/04/bvn8.png">
+<img src="https://zupimages.net/up/23/04/xomw.jpg">
 
 
 
