@@ -1,7 +1,6 @@
 # nodeJs - PLS
 
 
-
 ## Quelques images de l'application
  - Connexion
 
@@ -25,6 +24,7 @@ node server.js
 ```
 Il ne reste plus qu'a lancer http://localhost:3000
 
+
 ## Fonctionalité
 
   - création d'un utilisateur (choix du nom/image d'utilisateur)
@@ -35,3 +35,9 @@ Il ne reste plus qu'a lancer http://localhost:3000
   - message lorsque quelqu'un rejoint un salon
   - liste de toutes les personnes connecté 
   - information lorsque quelqu'un écrit un message
+
+
+## Avec plus de temps
+
+  - ajout d'une base de donnée qui aurait pu gérer les compte utilisateur
+  - sauvegarde des anciens messages
