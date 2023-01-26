@@ -10,7 +10,7 @@ window.onload = () => {
       var selectedButton = document.querySelector("input[name='avatar']:checked");
       e.preventDefault();
       socket.emit('addUser', { name: nameinput.value, room: room, image: selectedButton.id });// Stockage des données
-      nameuser.innerHTML=nameinput.value;// Affichage du nom chosit par l'utilisateur
+      nameuser.innerHTML="Bienvenue "+nameinput.value;// Affichage du nom chosit par l'utilisateur
       nameinput.value = ''
       login.style.display = 'none';
     }

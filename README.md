@@ -1,19 +1,18 @@
 # nodeJs - PLS
 
 
-
-## Quelque images de l'application
+## Quelques images de l'application
  - Connexion
 
-![alt text](https://zupimages.net/up/23/04/31jz.png)
+<img src="https://zupimages.net/up/23/04/31jz.png">
 
  - Chat General
 
-![alt text](https://zupimages.net/up/23/04/aj0a.png)
+<img src="https://zupimages.net/up/23/04/aj0a.png">
 
  - Chat privé
 
-![alt text](https://zupimages.net/up/23/04/bvn8.png)
+<img src="https://zupimages.net/up/23/04/bvn8.png">
 
 
 ## Lancement de l'application
@@ -21,17 +20,24 @@
 git clone git@devops.telecomste.fr:rodrigues.hugo/nodejs-pls.git
 cd NODEJS-PLS
 npm install socket.io
-node index.js
+node server.js
 ```
 Il ne reste plus qu'a lancer http://localhost:3000
 
+
 ## Fonctionalité
 
-  - création d'un utilisateur (choix du nom/image d'utilisateur)
-  - envoyer un message dans un salon general 
-  - envoyer un message privé en cliquant sur le nom d'utilisateur de la personne
-  - concaténation des messages si un même personne parle
-  - message de connexion et de déconnexion automatique
-  - message lorsque quelqu'un rejoint un salon
-  - liste de toutes les personnes connecté 
-  - information lorsque quelqu'un écrit un message
+  - Création d'un utilisateur (choix du nom/image d'utilisateur)
+  - Envoyer un message dans un salon general 
+  - Envoyer un message privé en cliquant sur le nom d'utilisateur de la personne
+  - Concaténation des messages si un même personne parle
+  - Message de connexion et de déconnexion automatique
+  - Message lorsque quelqu'un rejoint un salon
+  - Liste de toutes les personnes connecté 
+  - Information lorsque quelqu'un écrit un message
+
+
+## Avec plus de temps
+
+  - Ajout d'une base de donnée qui aurait pu gérer les compte utilisateur
+  - Sauvegarde des anciens messages
