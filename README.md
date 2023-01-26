@@ -4,15 +4,15 @@
 ## Quelques images de l'application
  - Connexion
 
-![alt text](https://zupimages.net/up/23/04/31jz.png)
+<img src="https://zupimages.net/up/23/04/31jz.png" width="1000" height="700">
 
  - Chat General
 
-![alt text](https://zupimages.net/up/23/04/aj0a.png)
+<img src="https://zupimages.net/up/23/04/aj0a.png" width="1000" height="700">
 
  - Chat privé
 
-![alt text](https://zupimages.net/up/23/04/bvn8.png)
+<img src="https://zupimages.net/up/23/04/bvn8.png" width="1000" height="700">
 
 
 ## Lancement de l'application
