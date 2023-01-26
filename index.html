@@ -1,47 +1,52 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Socket.io</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Socket.io</title>
 
-    <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <aside>
-      <div id = "ConnectedUsers"> Utilisateurs connectés
-        <ul id="tabs2">
-        </ul>
-      </div>
-      <div id = "Salons"> Salons
-        <ul id="tabs">
-            <li class="active" data-room="test">Général</li>
-            <li data-room="test">User1 User2</li>
-        </ul>
-      </div>
-    </aside>
-    <main>
-        <div id="content">
-            <ul id="messages"></ul>
-            <div id="writing"></div>
-        </div>
-        <form>
-            <input type="text" id="message" placeholder="Entrez votre message">
-            <button>Envoyer</button>
-        </form>
-    </main>
 
-    <div id="login">
+<body>
+  <aside>
+    <div id="ConnectedUsers">Utilisateurs connectés
+      <ul class="scroller" id="tabs2">
+      </ul>
+    </div>
+    <div id="Salons">Salons
+      <ul class="scroller" id="tabs">
+        <li class="active" data-room="test">Général</li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <div id="nameuser">Utilisateur</div>
+    <div id="content">
+      <ul id="messages"></ul>
+      <div id="writing"></div>
+    </div>
+    <form>
+      <input type="text" id="message" placeholder="Entrez votre message">
+      <button>Envoyer</button>
+    </form>
+  </main>
+
+  <div id="login">
     <form id="loginform" action="">
-        <fieldset id="pictures"></fieldset>
       <h1 id="Welcome">Bienvenue</h1>
-      <input id="nameinput" autocomplete="off" placeholder="Nom d'utilisateur">
-      <input type="submit" value="Envoyer">
+      <fieldset id="pictures"></fieldset>
+      <div id="choix-pseudo">
+        <input id="nameinput" autocomplete="off" placeholder="Nom d'utilisateur">
+        <input type="submit" value="Envoyer">
+      </div>
     </form>
   </div>
 
-    <!-- On va chercher socket.io.js -->
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="javascript/client.js"></script>
+  <!-- On va chercher socket.io.js -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="javascript/client.js"></script>
 </body>
+
 </html>

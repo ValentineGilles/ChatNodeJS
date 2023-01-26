@@ -34,12 +34,12 @@ app.get('/images', (req, res) => {
         return;
       }
     
-      let options = '<legend id="title">Please select your avatar</legend>';
+      let options = '<legend id="title">Choisissez votre avatar</legend>';
       files.forEach((file) => {
         options += 
         `<input type="radio" name="avatar" class="sr-only" id="${file}">
         <label for="${file}">
-          <img src="${imagesDir}/${file}" alt="${file}">
+          <img id = "choix-avatar" src="${imagesDir}/${file}" alt="${file}">
         </label>`
       });
     
@@ -54,7 +54,7 @@ let lastUser = "";
 io.on("connection", (socket) => {
     // On écoute les déconnexions
     socket.on("disconnect", () => {
-        io.emit('auto_message', connectedUsers[socket.id] + " vient de se déconnecter.");
+        io.to(connectedUsers[socket.id].room).emit('auto_message', connectedUsers[socket.id].name + " vient de se déconnecter.");
         delete connectedUsers[socket.id];
         io.emit('update online users', connectedUsers);
         });
@@ -81,19 +81,25 @@ io.on("connection", (socket) => {
     });
     
 
-    socket.on("create_room", (UserId) => {
-      room = connectedUsers[UserId].name + "/" + connectedUsers[socket.id].name;
-      io.to(UserId).to(socket.id).emit('update_rooms', room);
+    socket.on("create_room", (info) => {
+      let roomExist = false;
+      room1 = connectedUsers[info.UserId].name + "/" + connectedUsers[socket.id].name;
+      room2 = connectedUsers[socket.id].name + "/" + connectedUsers[info.UserId].name;
+      for (let i = 0; i < info.liste.length; i++) {
+        if(info.liste[i] === room1 || info.liste[i] === room2) {
+          roomExist = true;
+          break;
+        }
+      }
+      if(!roomExist) {
+        io.to(info.UserId).to(socket.id).emit('update_rooms', room1);
+      }
+      
     });
 
     // On gère le chat
     socket.on("chat_message", (msg) => {
         // On stocke le message dans la base
-
-        /*socket id, msg.room
-        room à l'id de la personne à qui on veut envoyer
-        */
-
         msg.name = connectedUsers[socket.id];
            if (lastUser != socket.id)
         {
@@ -114,7 +120,7 @@ io.on("connection", (socket) => {
         lastname=connectedUsers[socket.id];
         connectedUsers[socket.id] = info;
         socket.join(connectedUsers[socket.id].room);
-        io.emit('auto_message', connectedUsers[socket.id].name +" vient de se connecter.");
+        io.to(connectedUsers[socket.id].room).emit('auto_message', connectedUsers[socket.id].name +" vient de se connecter.");
         io.emit('update online users', connectedUsers);
     });
 
