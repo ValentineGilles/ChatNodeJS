@@ -41,7 +41,7 @@ window.onload = () => {
   socket.on('pseudo_message', (msg) => {
     var messages = document.getElementById('messages');
     var item = document.createElement('li');
-    item.innerHTML = "<p> <img src=Images/" + msg.image + ' id="image-avatar"></img>' + msg.name + "</p> </br>";
+    item.innerHTML = "<div id='pseudo'><img src=Images/" + msg.image + ' id="image-avatar"></img><p>'  + msg.name + "</p></div>";
     messages.appendChild(item);
     window.scrollTo(0, document.body.scrollHeight);
   });
@@ -51,7 +51,7 @@ window.onload = () => {
   socket.on('concat_message', (msg) => {
     var messages = document.getElementById('messages');
     var lastChild = document.querySelector("#messages").lastChild;
-    lastChild.innerHTML += "<br/>" + msg;
+    lastChild.innerHTML += "<p>" + msg + "</p>";
     messages.appendChild(lastChild);
     window.scrollTo(0, document.body.scrollHeight);
   });

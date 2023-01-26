@@ -88,17 +88,37 @@ main {
 }
 
 #messages li {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     border-bottom: 1px solid gray;
 }
 
-#messages li p {
+#messages p {
+    margin-left: 60px;
+    line-height : 5px;
+}
+
+#messages #pseudo p {
     font-weight: bold;
+    margin-left : 0;
     font-size: 15px;
-    text-decoration: underline;
     display: inline;
 }
+
+
+#messages #pseudo #image-avatar {
+    height : 50px; 
+    width: 50px;
+    margin-right: 10px;
+}
+
+#messages #pseudo {
+    display : flex;
+    align-items: center;
+    white-space: nowrap;
+    margin-left: 0px;
+}
+
 
 form {
     display: flex;
@@ -169,10 +189,6 @@ input[type="radio"]:checked+label {
     display: none;
 }
 
-#image-avatar {
-    width: 2%;
-    height: 2%;
-}
 
 #choix-avatar{
     width: 15%;
