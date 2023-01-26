@@ -30,4 +30,8 @@ Il ne reste plus qu'a lancer http://localhost:3000
   - création d'un utilisateur (choix du nom/image d'utilisateur)
   - envoyer un message dans un salon general 
   - envoyer un message privé en cliquant sur le nom d'utilisateur de la personne
-  - 
+  - concaténation des messages si un même personne parle
+  - message de connexion et de déconnexion automatique
+  - message lorsque quelqu'un rejoint un salon
+  - liste de toutes les personnes connecté 
+  - information lorsque quelqu'un écrit un message
