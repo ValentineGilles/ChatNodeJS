@@ -105,6 +105,13 @@ main {
     display: inline;
 }
 
+#messages #pseudo small {
+    font-size: 10px;
+    position: absolute;
+    right: 50%;
+    margin-bottom: 3%;
+}
+
 
 #messages #pseudo #image-avatar {
     height : 50px; 

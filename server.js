@@ -108,8 +108,8 @@ io.on("connection", (socket) => {
     msg.name = connectedUsers[socket.id]; // Attribution du bon nom d'utilisateur au message
 
     // Si l'utilisateur n'est pas celui qui a envoyé le dernier message, on envoie sa photo de profil et son pseudo
-    if (lastUser != socket.id) {
-      io.in(msg.room).emit('pseudo_message', connectedUsers[socket.id]);
+    if (lastUser != socket.id) {  
+      io.in(msg.room).emit('pseudo_message', {user : connectedUsers[socket.id], heure : msg.createdAt});
       lastUser = socket.id;
     }
 
