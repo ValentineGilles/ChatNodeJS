@@ -6,9 +6,11 @@ window.onload = () => {
   loginform.addEventListener('submit', function (e) {
     if (nameinput.value != "") {
       const room = document.querySelector("#tabs li.active").dataset.room;
+      var nameuser = document.querySelector("#nameuser");
       var selectedButton = document.querySelector("input[name='avatar']:checked");
       e.preventDefault();
       socket.emit('addUser', { name: nameinput.value, room: room, image: selectedButton.id });
+      nameuser.innerHTML=nameinput.value;
       nameinput.value = ''
       login.style.display = 'none';
     }
